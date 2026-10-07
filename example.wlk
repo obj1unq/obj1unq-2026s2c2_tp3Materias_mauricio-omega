@@ -54,14 +54,41 @@ object cursada {
 }
 
 class HistoriaAcademica{
-	const nombre = 
-	const notas = []
-	const materia = []
-	const property hola = 	[[POO, 1], [BD, 2]]
+	var property estudiante
+	const materiasYNotas = []
 
-	method nota() 
+	method registar(materia, nota){
+		self.validarFinalizacionDeCursada(materia)
+		self.validarRegistrar(materia)
+		materiasYNotas.add(new MateriaYNota(materia = materia, nota = nota))
+	} 
+
+	method validarFinalizacionDeCursada(materia) {
+		if(!estudiante.tieneAlgunaCarreraCon(materia)){
+			self.error("El/La estudiante " +estudiante.nombre()+" no cursa la materia" + materia.nombre())
+		}
+ 	}
+
+	method validarRegistrar(laMateria) {
+		if(materiasYNotas.contains(laMateria) && materiasYNotas.any({materiaYNota => materiaYNota == laMateria && materiaYNota.estaAprobada()})){
+			self.error("No se puede registrar una materia ya aprobada")
+		}
+	}
 }
 
-object nota {
+class MateriaYNota {	
+	var property materia
+	var nota  
 
+	method nota(_nota) {
+		self.validarNota(_nota)
+		nota = _nota
+	}
+	method validarNota(_nota) {
+		if(!_nota.between(1, 10)){
+			self.error("Nota no valida")
+		}
+	}
+
+	method estaAprobada() = nota.between(6, 10)
 }
