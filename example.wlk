@@ -1,4 +1,5 @@
 class Estudiante{
+	var property nombre 
 	const carrerasInscriptas = #{}
 	method carrerasInscriptas() = carrerasInscriptas
 	
@@ -16,7 +17,7 @@ class Estudiante{
 		carrerasInscriptas.add(carrera)
 	}
 	
-	method hayCarreraQueTieneMateria(materia) = carrerasInscriptas.any({carrera => carrera.contieneMateria(materia)})
+	method tieneAlgunaCarreraCon(materia) = carrerasInscriptas.any({carrera => carrera.contieneMateria(materia)})
 }
 
 class Carrera{
@@ -35,4 +36,32 @@ class Carrera{
 
 class Materia{
 	var property nombre
+
+}
+
+object cursada {
+	const property estudiantes = []
+
+	method finalizadaPorEstudiante(estudiante, materia) {
+		self.validarCursada(estudiante, materia)
+		estudiantes.add(estudiante)
+	}
+	method validarCursada(estudiante, materia) {
+		if(!estudiante.tieneAlgunaCarreraCon(materia)){
+			self.error("El/La estudiante " +estudiante.nombre()+" no cursa la materia" + materia.nombre())
+		}
+ 	}
+}
+
+class HistoriaAcademica{
+	const nombre = 
+	const notas = []
+	const materia = []
+	const property hola = 	[[POO, 1], [BD, 2]]
+
+	method nota() 
+}
+
+object nota {
+
 }
